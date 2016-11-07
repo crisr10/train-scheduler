@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Train Scheduler</title>
+    <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
+    <style type="text/css">
+        .jumbotron{
+            text-align:center;
+        }
+        
+        input {
+            max-width: 100%;
+        } 
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+    <div class="jumbotron">
+      <h1>Employee Data Management</h1>
+      <h4>A Comprehensive Directory of Employee Billable hours</h4>
+    </div>
+    </div>
+    
+    <div class="container">
+    
+    <div class="panel panel-primary">
+    <div class="panel-heading">Current Employees</div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Role</th>
+            <th>Start Date</th>
+            <th>Months Worked</th>
+            <th>Monthly Rate ($)</th>
+            <th>Total Billed ($)</th>
+        </tr>
+        </thead>
+        <tbody id='employeeTable'>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    
+
+    
+    <div class="container">  
+    
+    <div class="panel panel-primary">
+    <div class="panel-heading">Add an Employee</div>
+    
+        <div class="container">
+
+            <form>
+
+            <div class="form-group">
+            <div class="col-sm-10">
+                <label for="employeeName">Employee Name</label>
+                <input type="text" class="form-control" id="employeeName" placeholder="Employee Name">
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="col-sm-10">
+                <label for="employeeRole">Role</label>
+                <input type="text" class="form-control" id="employeeRole" placeholder="Role">
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="col-sm-10">
+                <label for="employeeStartDate">Start Date</label>
+                <input type="date" class="form-control" id="employeeStartDate" placeholder="DD/MM/YY">
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="col-sm-10">
+                <label for="employeeRate">Monthly Rate</label>
+                <input type="number" class="form-control" id="employeeRate" placeholder="$0.00">
+            </div>
+            </div>
+
+            <div class="col-sm-10">
+            <button id="submitButton" type="submit" class="btn btn-default">Submit</button>
+            </div>
+
+            </form>
+
+        </div>
+    
+    </div>
+    </div>
+    
+    </div>
+    
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyANNS7yzkuQo0daYrdbuEQkcEgSETG-wN0",
+    authDomain: "employee-data-e6ab0.firebaseapp.com",
+    databaseURL: "https://employee-data-e6ab0.firebaseio.com",
+    storageBucket: "employee-data-e6ab0.appspot.com",
+    messagingSenderId: "337899887211"
+  };
+  firebase.initializeApp(config);
+
+var database = firebase.database();
+
+    database.ref().on("child_added", function(childSnapshot){
+
+      if (snapshot.child("Cristian").exists()) {
+
+        var newName = childSnapshot.val().name;
+        var newRole = childSnapshot.val().role;
+        var newDate = childSnapshot.val().startDate;
+        var newRate = childSnapshot.val().monthlyRate;
+        $("#employeeTable").append("<tr><td>" + newName + "</td><td>" + newRole + "</td><td>" + newDate + "</td><td><span id='monthsWorked'></span></td><td>" + newRate + "</td><td><span id='totalBilled'></span></td></tr>");
+      }
+        
+    });
+
+$("#submitButton").on("click", function(){
+"use strict";
+
+var employeeName = $("#employeeName").val().trim();
+console.log(employeeName);
+
+var employeeRole = $("#employeeRole").val().trim();
+console.log(employeeRole);
+
+var startDate = $("#employeeStartDate").val();
+console.log(startDate);
+
+var monthlyRate = $("#employeeRate").val();
+console.log(monthlyRate);
+
+    database.ref().push({
+        name: employeeName,
+        role: employeeRole,
+        startDate: startDate,
+        monthlyRate: monthlyRate
+    });
+    return false;
+});
+
+
+</script>
+</body>
+</html>
