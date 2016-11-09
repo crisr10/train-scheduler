@@ -34,7 +34,6 @@ $(document).ready(function(){
 
 	$('#trainData').append('<tr class="trainRow"><td class="newTrain">'+newTrain+'</td><td class="newDestination">'+newDestination+'</td><td class="newFrequency">'+newFrequency+'</td><td class="nextArrival">'+nextArrivalConverted+'</td><td class="minutesAway">'+minutesAway+'</td></tr>');
 	// $('#trainData').append('<tr class="rowOfDta"></tr>');
-	$('.trainRow').each()
   })
 
   $('#submitButton').on('click',function(){
