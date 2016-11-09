@@ -2,12 +2,16 @@
 	margin:0 10px;
 }
 .jumbotron {
+	background-image:url('http://tourmet.com/wp-content/uploads/2015/04/7.-Berlin-Hauptbahnhof-Germany.jpg');
 	text-align:center;
-	background-color:white;
 }
-.jumbotron h1, .jumbotron h3 {
-	color:black;
+.jumbotron h1 {
+	color:white;
+	text-shadow: 4px 4px 4px black;
 }
 .btn {
 	margin:10px;
+}
+body {
+	background-image: url();
 }
