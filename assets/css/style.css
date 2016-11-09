@@ -22,3 +22,7 @@ body {
 	font-family: 'Shrikhand', cursive;
 	text-shadow: 2px 2px 2px #696969;
 }
+
+#trainName, #destination, #trainTime, #frequency {
+	color:black;
+}

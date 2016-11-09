@@ -10,8 +10,31 @@ $(document).ready(function(){
   };
   firebase.initializeApp(config);
 
-  // var provider = new firebase.auth.GoogleAuthProvider();
-  // provider.addScope('https://www.googleapis.com/auth/plus.login');
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('https://www.googleapis.com/auth/plus.login');
+
+  provider.setCustomParameters({
+  'login_hint': 'user@example.com'
+});
+
+firebase.auth().getRedirectResult().then(function(result) {
+  if (result.credential) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // ...
+  }
+  // The signed-in user info.
+  var user = result.user;
+}).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // The email of the user's account used.
+  var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+  var credential = error.credential;
+  // ...
+});
 
 
   var database = firebase.database();
@@ -36,7 +59,12 @@ $(document).ready(function(){
 
 
 
-	$('#trainData').append('<tr class="trainRow"><td class="newTrain">'+newTrain+'</td><td class="newDestination">'+newDestination+'</td><td class="newFrequency">'+newFrequency+'</td><td class="nextArrival">'+nextArrivalConverted+'</td><td class="minutesAway">'+minutesAway+'</td></tr>');
+	$('#trainData').append('<tr class="trainRow"><td class="newTrain">'
+		+newTrain+'</td><td class="newDestination">'
+		+newDestination+'</td><td class="newFrequency">'
+		+newFrequency+'</td><td class="nextArrival">'
+		+nextArrivalConverted+'</td><td class="minutesAway">'
+		+minutesAway+'</td></tr>');
 	// $('#trainData').append('<tr class="rowOfDta"></tr>');
   })
 
@@ -46,6 +74,11 @@ $(document).ready(function(){
   	destination = $('#destination').val().trim();
   	var firstTrainTime = $('#trainTime').val().trim();
   	var frequency = $('#frequency').val().trim();
+
+  	$('#trainName').val('');
+  	$('#destination').val('');
+  	$('#trainTime').val('');
+  	$('#frequency').val('');
 
   	database.ref().push({
   		trainName: trainName,
