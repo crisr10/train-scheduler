@@ -9,7 +9,7 @@ $(document).ready(function(){
     messagingSenderId: "1090249410591"
   };
   firebase.initializeApp(config);
-
+  
   var database = firebase.database();
   var trainName = '';
   var destination = '';
