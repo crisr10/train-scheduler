@@ -9,7 +9,11 @@ $(document).ready(function(){
     messagingSenderId: "1090249410591"
   };
   firebase.initializeApp(config);
-  
+
+  // var provider = new firebase.auth.GoogleAuthProvider();
+  // provider.addScope('https://www.googleapis.com/auth/plus.login');
+
+
   var database = firebase.database();
   var trainName = '';
   var destination = '';
